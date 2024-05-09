@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { BookContext } from "../context/BookContext";
 
 function BookForm() {
-  const { addBook } = useContext(BookContext);
+  const { dispatch } = useContext(BookContext);
 
   const [title, setTitle] = useState("");
 
@@ -12,7 +12,7 @@ function BookForm() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        addBook(title, author);
+        dispatch({ type: "ADD_BOOK", book: { title, author } });
         setTitle("");
         setAuthor("");
       }}
@@ -33,6 +33,7 @@ function BookForm() {
         onChange={(e) => {
           setAuthor(e.target.value);
         }}
+        required
       />
       <input type="submit" value="Add book" />
     </form>
